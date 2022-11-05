@@ -1,4 +1,4 @@
-def define_array(SInputFile):
+def define_array(SInputFile):  # заполнение массива числами из файла
 
     import array
     a = array.array('i', [])
@@ -18,24 +18,30 @@ def define_array(SInputFile):
     return a
 
 
-def print_array(array, len):
+def print_array(array, l):
 
-    for i in range(len):
+    for i in range(l):
         print(array[i])
 
 
 def double_minus(a, l):  # a - массив, l - длина этого массива
 
-    count_move = 0  # счётчик перемещений
-
-    for i in range(l):
+    i = 0
+    while i < l:
         if a[i] >= 0:
+            i += 1
             continue
 
-        tmp = a[i+1] #  tmp = 1
-        a[i+1] = a[i] # a[i+1] = -2
-        #  2 -2 1 2 3 4 -> 2 -2 -2 1 2 3 4
-        # -2 -> -2 -2
+        # a.append(a[l-1])
+        # l += 1
+
+        # for j in range(l-1, i, -1): 
+        #     a[j] = a[j-1]
+
+        # a[i+1] = a[i]
+
+        a.insert(i + 1, a[i])
+        i += 2
 
     return a
 
@@ -51,7 +57,7 @@ def main():
     print_array(arr, len(arr))
     print("-------------------")
 
-    arr = double_minus(arr);
+    arr = double_minus(arr, len(arr))
 
     print("--------------")
     print("Changed array:")
@@ -62,35 +68,3 @@ def main():
 
 
 main()
-
-"""def task(SInputFile):
-	maximum = 0
-	summa = 0 # сумма всех эл-ов
-	x = 0 # в x записываем текущий символ в типе int
-	k = 0 #для рассм.1-го эл-та
-	summa_do = 0 # сумма до 1-го глоб.макс.
-	with open(SInputFile) as f:
-		while True:
-			x_input = f.readline() # в x_int считываем символ
-			if not x_input: # выходим, если конец
-				break
-			x = int(x_input) # преобразуемуем x_input - переменную типа str в целочисл. переменную x
-			#print("x = ", x)
-			summa = summa + x
-			#print("summa = ", summa)
-			if k == 0: #если встретился 1-ый эл-т
-				k = k + 1
-				maximum = x #он автоматически становится максимумом
-				summa_do = summa - x
-			elif x > maximum:
-				maximum = x # обновляем максимум
-				summa_do = summa - x # обновляем сумму до данного эл-та
-	return summa_do
-
-
-def main():
-	iskomaya_summa = task("1.txt")
-	print("summa do maximuma = ", iskomaya_summa)
-	return 0
-
-main()"""
