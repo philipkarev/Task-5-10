@@ -1,20 +1,24 @@
 def define_array(SInputFile):  # заполнение массива числами из файла
 
-    import array
-    a = array.array('i', [])
+    a = []
 
     with open(SInputFile) as f:
         while True:
-            s = f.readline()  # считываем символ
+            try:
+                s = f.readline()  # считываем символ
 
-            if not s:  # выходим, если конец
-                break
+                if not s:  # выходим, если конец
+                    break
 
-            s = s.split()
+                s = s.split()
 
-            for i in range(len(s)):
-                a.append(int(s[i]))
-
+                for i in range(len(s)):
+                    a.append(int(s[i]))
+            except ValueError:
+                print("Error: bad value.")
+            except FileNotFoundError:
+                print("Error: file not found.")
+    
     return a
 
 
@@ -48,8 +52,7 @@ def double_minus(a, l):  # a - массив, l - длина этого масс�
 
 def main():
 
-    import array
-    arr = array.array('i', [])
+    arr = []
 
     print("-------------------")
     print("The original array:")
